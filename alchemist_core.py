@@ -13,6 +13,8 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask, render_template_string, render_template, request, redirect, url_for, jsonify, \
     session as flask_session
+import os
+
 
 # --- Step 0: Load spaCy model ---
 print("Loading spaCy model for advanced concept extraction...")
@@ -428,7 +430,7 @@ def get_last_session_data(user_id):
 
 # --- Step 4: Setup Flask Web Application ---
 app = Flask(__name__)
-app.secret_key = 'your_super_secret_key_here'
+app.secret_key = os.environ.get('SECRET_KEY', 'a_default_dev_key_if_not_set')
 login_manager.init_app(app)
 
 # HTML template
