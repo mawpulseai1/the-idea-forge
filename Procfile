@@ -1,0 +1,1 @@
+web: gunicorn alchemist_core:app
